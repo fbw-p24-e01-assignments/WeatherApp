@@ -14,15 +14,15 @@ def home(request):
             city_name = form.cleaned_data['name']
             existing_city_count = City.objects.filter(name=city_name).count()
             if existing_city_count == 0:
-                api_key = 'your_api_key_here'  # Replace with your actual API key
+                api_key = 'your_api_key_here'  
                 url = f'http://api.openweathermap.org/data/2.5/weather?q={city_name}&appid=b73cf5c568d5881c8df0e6c401498eb2&units=metric'
 
 
                 try:
                     response = requests.get(url)
-                    response.raise_for_status()  # Raise HTTPError for bad responses (4xx and 5xx)
-                    data = response.json()  # Attempt to parse JSON response
-                    print(data)  # Debugging: Print the response
+                    response.raise_for_status() 
+                    data = response.json()  
+                    print(data)  
 
                     if data['cod'] == 200:
                         form.save()
@@ -40,7 +40,7 @@ def home(request):
 
     form = CityForm()
     cities = City.objects.all()
-    api_key = 'your_api_key_here'  # Replace with your actual API key
+    api_key = 'your_api_key_here'  
 
     for city in cities:
         url = f'http://api.openweathermap.org/data/2.5/weather?q={city.name}&appid=b73cf5c568d5881c8df0e6c401498eb2&units=metric'
